@@ -14,13 +14,13 @@ schemaVersion: 2.2.0
 #   id: java-quarkus
 #   registryUrl: "https://registry.devfile.io"
 components:
-  # - name: outerloop-build
-  #   image:
-  #     imageName: java-quarkus-image:latest
-  #     dockerfile:
-  #       uri: src/main/docker/Dockerfile.jvm
-  #       buildContext: .
-  #       rootRequired: false
+  - name: outerloop-build
+    image:
+      imageName: java-quarkus-image:latest
+      dockerfile:
+        uri: src/main/docker/Dockerfile.jvm
+        buildContext: .
+        rootRequired: false
   - name: outerloop-deploy
     attributes:
       deployment/replicas: 1

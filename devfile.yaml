@@ -9,17 +9,25 @@ metadata:
   - Quarkus
   version: 1.1.0
   website: https://quarkus.io
-schemaVersion: 2.0.0
+schemaVersion: 2.2.0
 parent:
   id: java-quarkus
   registryUrl: "https://registry.devfile.io"
-  components:
-  - container:
-      endpoints:
-      - exposure: public
-        name: inventory
-        targetPort: 8080
-      - name: '8080-http'
-        targetPort: 8080
-        exposure: internal
-    name: tools
+components:
+  - name: outerloop-build
+    image:
+      imageName: java-quarkus-image:latest
+      dockerfile:
+        uri: src/main/docker/Dockerfile.jvm
+        buildContext: .
+        rootRequired: false
+  - name: outerloop-deploy
+    attributes:
+      deployment/replicas: 1
+      deployment/cpuLimit: "100m"
+      deployment/cpuRequest: 10m
+      deployment/memoryLimit: 250Mi
+      deployment/memoryRequest: 100Mi
+      deployment/container-port: 8080
+    kubernetes:
+      uri: outerloop-deploy.yaml

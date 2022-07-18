@@ -16,7 +16,7 @@ schemaVersion: 2.2.0
 components:
   - name: outerloop-build
     image:
-      imageName: java-quarkus-image:latest
+      imageName: inventory-quarkus-image:latest
       dockerfile:
         uri: src/main/docker/Dockerfile.jvm
         buildContext: .
